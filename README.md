@@ -30,4 +30,27 @@ b = 0
  ↓
 Application crashes
 
+Adaptive Maintenance
 
+Change ID: CM-002
+
+Problem/Requirement:
+The current Math Problem Solver is a command-line application.
+Users want to access the system through a web browser.
+
+Requested Change:
+Adapt the existing application to a web-based environment using Flask.
+
+Reason:
+The software needs to support browser-based interaction.
+
+Affected Components:
+- app.py
+- requirements.txt
+- New templates/index.html
+
+Reusable Components:
+- calculator/basic.py
+- calculator/advanced.py
+- calculator/validator.py
+- utils/formatter.py
