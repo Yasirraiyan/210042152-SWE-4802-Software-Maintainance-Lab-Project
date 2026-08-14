@@ -1,0 +1,1023 @@
+\documentclass[12pt,a4paper,openany]{report}
+
+% =========================================================
+% PACKAGES
+% =========================================================
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{setspace}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{longtable}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{amsmath}
+\usepackage{tikz}
+
+% =========================================================
+% GENERAL SETTINGS
+% =========================================================
+\onehalfspacing
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    urlcolor=blue,
+    citecolor=black
+}
+
+% =========================================================
+% CODE LISTING STYLE
+% =========================================================
+\lstset{
+    language=Python,
+    basicstyle=\ttfamily\small,
+    keywordstyle=\color{blue},
+    commentstyle=\color{gray},
+    stringstyle=\color{red},
+    numbers=left,
+    numberstyle=\tiny,
+    stepnumber=1,
+    numbersep=8pt,
+    frame=single,
+    breaklines=true,
+    showstringspaces=false,
+    tabsize=4
+}
+
+% =========================================================
+% HEADER AND FOOTER
+% =========================================================
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{Software Maintenance Lab Project}
+\fancyhead[R]{Math Problem Solver}
+\fancyfoot[C]{\thepage}
+
+% =========================================================
+% DOCUMENT
+% =========================================================
+\begin{document}
+
+% =========================================================
+% TITLE PAGE
+% =========================================================
+
+\begin{titlepage}
+    \centering
+
+    \vspace*{1.0cm}
+
+    {\Large \textbf{ISLAMIC UNIVERSITY OF TECHNOLOGY}}\\[0.4cm]
+    {\large \textbf{Department of Computer Science and Engineering}}\\[1.5cm]
+
+    {\Huge \textbf{Software Maintenance Lab Project Report}}\\[1.0cm]
+
+    {\LARGE \textbf{Math Problem Solver}}\\[1.8cm]
+
+    \renewcommand{\arraystretch}{1.5}
+
+    \begin{tabular}{ll}
+        \textbf{Course Code:} & SWE-4802 \\
+        \textbf{Course Title:} & Software Maintenance Lab \\
+        \textbf{Name:} & Muhammad Yasir Raiyan \\
+        \textbf{ID:} & 210042152 \\
+        \textbf{Dept:} & CSE \\
+        \textbf{Prog:} & B.Sc. in S.W.E \\
+        \textbf{Sem:} & 8th \\
+        \textbf{Academic Year:} & 2024--25 \\
+    \end{tabular}
+
+    \vfill
+
+    {\large \textbf{Software Maintenance Project}}
+
+    \vspace{0.5cm}
+
+    {\large 2026}
+
+\end{titlepage}
+
+% =========================================================
+% TABLE OF CONTENTS
+% =========================================================
+
+\pagenumbering{roman}
+
+\tableofcontents
+
+% IMPORTANT:
+% No \clearpage here.
+% This prevents an unnecessary blank page.
+
+\pagenumbering{arabic}
+
+% =========================================================
+% CHAPTER 1
+% =========================================================
+
+\chapter{Project Overview}
+
+\section{Introduction}
+
+Math Problem Solver is a Python-based mathematical calculation
+application. The initial version of the application provides basic and
+advanced mathematical operations through a command-line interface.
+The system was subsequently adapted and improved through different
+software maintenance activities.
+
+The main objective of this project is to simulate the four major
+categories of software maintenance:
+
+\begin{enumerate}
+    \item Corrective Maintenance
+    \item Adaptive Maintenance
+    \item Preventive Maintenance
+    \item Perfective Maintenance
+\end{enumerate}
+
+For each maintenance category, the following activities were performed:
+
+\begin{enumerate}
+    \item Program Comprehension
+    \item Change Management
+    \item Impact Analysis
+    \item Reverse Engineering
+    \item Refactoring
+\end{enumerate}
+
+The project demonstrates how an existing software system can be
+understood, modified, improved, tested, and evolved throughout its
+maintenance lifecycle.
+
+\section{Project Objectives}
+
+The major objectives of this project are:
+
+\begin{itemize}
+    \item Identify and correct existing software defects.
+    \item Adapt the existing system to a new execution environment.
+    \item Improve maintainability and prevent future defects.
+    \item Add new functionality based on user requirements.
+    \item Analyze the impact of software changes.
+    \item Perform reverse engineering of existing functionality.
+    \item Refactor existing code without changing intended behavior.
+    \item Maintain regression testing throughout the maintenance
+          lifecycle.
+\end{itemize}
+
+% =========================================================
+% CHAPTER 2
+% =========================================================
+
+\chapter{Initial System -- V1 Baseline}
+
+\section{System Description}
+
+The initial version of the Math Problem Solver provides mathematical
+calculation functionality through a command-line interface.
+
+The baseline system contains:
+
+\begin{itemize}
+    \item Basic arithmetic operations
+    \item Advanced mathematical operations
+    \item Input validation
+    \item Result formatting
+    \item Logging
+    \item Unit testing
+    \item Integration testing
+\end{itemize}
+
+\section{Initial Project Structure}
+
+The initial project structure is shown below:
+
+\begin{lstlisting}[language={}]
+Math-Problem-Solver/
+|
++-- app.py
++-- main.py
+|
++-- calculator/
+|   +-- basic.py
+|   +-- advanced.py
+|   +-- validator.py
+|
++-- utils/
+|   +-- logger.py
+|   +-- formatter.py
+|
++-- tests/
+|   +-- test_basic.py
+|   +-- test_advanced.py
+|   +-- test_validator.py
+|   +-- test_integration.py
+|
++-- templates/
+|   +-- index.html
+|
++-- requirements.txt
++-- README.md
+\end{lstlisting}
+
+\section{Baseline Testing}
+
+Before performing maintenance activities, the initial version was
+tested.
+
+\begin{verbatim}
+Ran 10 tests
+OK
+\end{verbatim}
+
+The successful baseline test result was used as the reference point
+for subsequent maintenance activities.
+
+% =========================================================
+% CHAPTER 3
+% =========================================================
+
+\chapter{Corrective Maintenance}
+
+\section{Scenario}
+
+A defect was identified in the division operation. When the denominator
+was zero, the application produced a \texttt{ZeroDivisionError}, which
+caused the application to terminate unexpectedly.
+
+\section{Change ID}
+
+\textbf{CM-001}
+
+\section{Program Comprehension}
+
+The existing calculation flow was analyzed to locate the source of the
+problem.
+
+\begin{verbatim}
+User
+  |
+  v
+main.py
+  |
+  v
+calculator/basic.py
+  |
+  v
+divide(a, b)
+  |
+  v
+a / b
+\end{verbatim}
+
+The \texttt{divide()} function was identified as the source of the
+division-by-zero defect.
+
+\section{Change Management}
+
+\subsection{Problem}
+
+Division by zero caused the application to crash with a
+\texttt{ZeroDivisionError}.
+
+\subsection{Requested Change}
+
+The system should prevent division by zero and provide a meaningful
+error message to the user.
+
+\subsection{Change Implemented}
+
+The \texttt{divide()} function was modified to validate the denominator
+before performing the calculation.
+
+\section{Impact Analysis}
+
+The following components were affected:
+
+\begin{table}[H]
+\centering
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{p{5cm} p{3cm}}
+\toprule
+\textbf{Component} & \textbf{Impact} \\
+\midrule
+\texttt{calculator/basic.py} & Direct Impact \\
+\texttt{main.py} & Indirect Impact \\
+\texttt{tests/test\_basic.py} & Regression Test \\
+\bottomrule
+\end{tabular}
+\caption{Corrective Maintenance Impact Analysis}
+\end{table}
+
+\section{Reverse Engineering}
+
+The original execution flow was reconstructed as follows:
+
+\begin{verbatim}
+User
+  |
+  v
+Select Division
+  |
+  v
+main.py
+  |
+  v
+divide(a, b)
+  |
+  v
+Denominator = 0
+  |
+  v
+ZeroDivisionError
+\end{verbatim}
+
+This analysis helped identify where the defect occurred and which
+components required modification.
+
+\section{Refactoring}
+
+The division function was changed to:
+
+\begin{lstlisting}
+def divide(a: float, b: float) -> float:
+    if b == 0:
+        raise ValueError("Cannot divide by zero")
+    return a / b
+\end{lstlisting}
+
+A regression test was added:
+
+\begin{lstlisting}
+def test_divide_by_zero(self):
+    with self.assertRaises(ValueError):
+        divide(10, 0)
+\end{lstlisting}
+
+\section{Testing Result}
+
+After implementing the corrective maintenance:
+
+\begin{verbatim}
+Ran 11 tests
+OK
+\end{verbatim}
+
+\section{Version Transition}
+
+\begin{center}
+\textbf{V1}
+$\rightarrow$
+\textbf{Corrective Maintenance}
+$\rightarrow$
+\textbf{V1.1}
+\end{center}
+
+% =========================================================
+% CHAPTER 4
+% =========================================================
+
+\chapter{Adaptive Maintenance}
+
+\section{Scenario}
+
+The original application was command-line based. The system needed to
+be adapted so that users could access the calculator through a web
+browser.
+
+\section{Change ID}
+
+\textbf{CM-002}
+
+\section{Program Comprehension}
+
+The existing architecture was analyzed:
+
+\begin{verbatim}
+User
+  |
+  v
+main.py
+  |
+  v
+Calculator Modules
+  |
+  v
+Result
+\end{verbatim}
+
+The calculation modules were already separated from the main
+application logic. Therefore, they could be reused when adapting the
+system to a web environment.
+
+\section{Change Management}
+
+\subsection{Requirement}
+
+The existing command-line application needed to be adapted to a
+web-based environment.
+
+\subsection{Change Implemented}
+
+A Flask web interface was introduced while reusing the existing
+calculator modules.
+
+\subsection{Technology Added}
+
+\begin{itemize}
+    \item Flask
+    \item HTML
+    \item Web interface
+\end{itemize}
+
+\section{Impact Analysis}
+
+The affected components were:
+
+\begin{table}[H]
+\centering
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{p{5cm} p{3cm}}
+\toprule
+\textbf{Component} & \textbf{Impact} \\
+\midrule
+\texttt{app.py} & Web Application \\
+\texttt{requirements.txt} & Flask Dependency \\
+\texttt{templates/index.html} & Web Interface \\
+\bottomrule
+\end{tabular}
+\caption{Adaptive Maintenance Impact Analysis}
+\end{table}
+
+The following components were reused:
+
+\begin{itemize}
+    \item \texttt{calculator/basic.py}
+    \item \texttt{calculator/advanced.py}
+    \item \texttt{calculator/validator.py}
+\end{itemize}
+
+\section{Reverse Engineering}
+
+The original flow was:
+
+\begin{verbatim}
+CLI
+ |
+ v
+main.py
+ |
+ v
+Validation
+ |
+ v
+Calculator Function
+ |
+ v
+Result
+\end{verbatim}
+
+The adapted flow became:
+
+\begin{verbatim}
+Browser
+ |
+ v
+index.html
+ |
+ v
+app.py
+ |
+ v
+Validation
+ |
+ v
+Calculator Function
+ |
+ v
+Result
+ |
+ v
+Browser
+\end{verbatim}
+
+\section{Refactoring}
+
+A Flask web interface was added without rewriting the existing
+calculator logic.
+
+The existing calculator functions were reused by \texttt{app.py}.
+
+\begin{verbatim}
+Browser
+  |
+  v
+Flask app.py
+  |
+  v
+calculator/
+  |-- basic.py
+  |-- advanced.py
+  +-- validator.py
+  |
+  v
+Result
+\end{verbatim}
+
+The Math Problem Solver can now be accessed through a web browser.
+
+\section{Version Transition}
+
+\begin{center}
+\textbf{V1.1}
+$\rightarrow$
+\textbf{Adaptive Maintenance}
+$\rightarrow$
+\textbf{V1.2}
+\end{center}
+
+% =========================================================
+% CHAPTER 5
+% =========================================================
+
+\chapter{Preventive Maintenance}
+
+\section{Scenario}
+
+The application was working correctly, but improvements were required
+to prevent future defects and make the system easier to maintain.
+
+\section{Change ID}
+
+\textbf{CM-003}
+
+\section{Program Comprehension}
+
+The existing project structure and dependencies were analyzed.
+
+The following areas were identified for improvement:
+
+\begin{itemize}
+    \item Input validation
+    \item Error handling
+    \item Code readability
+    \item Type information
+    \item Test coverage
+\end{itemize}
+
+\section{Change Management}
+
+\subsection{Objective}
+
+The objective was to improve the maintainability, reliability, and
+readability of the system.
+
+\subsection{Changes Implemented}
+
+The following improvements were performed:
+
+\begin{itemize}
+    \item Improved input validation
+    \item Added type hints
+    \item Improved error handling
+    \item Added mathematical input validation
+    \item Added additional tests
+\end{itemize}
+
+\section{Impact Analysis}
+
+The affected components were:
+
+\begin{table}[H]
+\centering
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{p{6cm} p{3cm}}
+\toprule
+\textbf{Component} & \textbf{Impact} \\
+\midrule
+\texttt{calculator/validator.py} & High \\
+\texttt{calculator/basic.py} & Medium \\
+\texttt{calculator/advanced.py} & Medium \\
+\texttt{tests/test\_validator.py} & High \\
+\texttt{tests/test\_advanced.py} & High \\
+\bottomrule
+\end{tabular}
+\caption{Preventive Maintenance Impact Analysis}
+\end{table}
+
+The intended functionality of the calculator was preserved.
+
+\section{Reverse Engineering}
+
+The validation flow was analyzed:
+
+\begin{verbatim}
+User Input
+ |
+ v
+validate_number()
+ |
+ v
+Convert to number
+ |
+ v
+Calculator
+ |
+ v
+Result
+\end{verbatim}
+
+Potential invalid inputs were identified before they could cause
+unexpected behavior.
+
+\section{Refactoring}
+
+The validation function was improved with type hints and better
+exception handling:
+
+\begin{lstlisting}
+def validate_number(value: str) -> float:
+    try:
+        return float(value)
+    except (ValueError, TypeError):
+        raise ValueError(
+            "Invalid number. Please enter a valid number."
+        )
+\end{lstlisting}
+
+The advanced calculator was also improved to handle invalid square-root
+and factorial inputs.
+
+Additional validation tests were added.
+
+\section{Result}
+
+The software became easier to understand, maintain, and extend while
+preserving its existing behavior.
+
+\section{Version Transition}
+
+\begin{center}
+\textbf{V1.2}
+$\rightarrow$
+\textbf{Preventive Maintenance}
+$\rightarrow$
+\textbf{V1.3}
+\end{center}
+
+% =========================================================
+% CHAPTER 6
+% =========================================================
+
+\chapter{Perfective Maintenance}
+
+\section{Scenario}
+
+Users requested additional mathematical functionality and an improved
+web experience.
+
+\section{Change ID}
+
+\textbf{CM-004}
+
+\section{Program Comprehension}
+
+The existing advanced calculator and web application were analyzed to
+determine where the new features should be integrated.
+
+\begin{verbatim}
+Browser
+ |
+ v
+app.py
+ |
+ v
+Calculator Module
+ |
+ v
+Result
+\end{verbatim}
+
+\section{Change Management}
+
+\subsection{User Requirements}
+
+Users requested:
+
+\begin{itemize}
+    \item Percentage calculation
+    \item Factorial calculation
+    \item Improved operation selection
+\end{itemize}
+
+\subsection{Objective}
+
+The objective was to improve the functionality and user experience of
+the application.
+
+\section{Impact Analysis}
+
+The following components were affected:
+
+\begin{itemize}
+    \item \texttt{calculator/advanced.py}
+    \item \texttt{app.py}
+    \item \texttt{templates/index.html}
+    \item \texttt{tests/test\_advanced.py}
+\end{itemize}
+
+Existing basic calculator functionality remained unchanged.
+
+\section{Reverse Engineering}
+
+The existing feature flow was analyzed:
+
+\begin{verbatim}
+Browser
+ |
+ v
+app.py
+ |
+ v
+Operation Selection
+ |
+ v
+Calculator Function
+ |
+ v
+Result
+\end{verbatim}
+
+The new features were integrated into the existing architecture.
+
+\section{Refactoring}
+
+Two new mathematical operations were added.
+
+\subsection{Factorial}
+
+\begin{lstlisting}
+def factorial(n: int) -> int:
+    if n < 0:
+        raise ValueError(
+            "Factorial is not defined for negative numbers."
+        )
+
+    if not float(n).is_integer():
+        raise ValueError(
+            "Factorial requires a whole number."
+        )
+
+    return math.factorial(int(n))
+\end{lstlisting}
+
+\subsection{Percentage}
+
+\begin{lstlisting}
+def percentage(value: float, percent: float) -> float:
+    return (value * percent) / 100
+\end{lstlisting}
+
+The web interface was updated to allow users to select the new
+operations.
+
+\section{Result}
+
+The final application supports:
+
+\begin{itemize}
+    \item Addition
+    \item Subtraction
+    \item Multiplication
+    \item Division
+    \item Power
+    \item Square Root
+    \item Cube Root
+    \item Factorial
+    \item Percentage
+\end{itemize}
+
+\section{Testing Result}
+
+After perfective maintenance:
+
+\begin{verbatim}
+Ran 16 tests
+OK
+\end{verbatim}
+
+\section{Version Transition}
+
+\begin{center}
+\textbf{V1.3}
+$\rightarrow$
+\textbf{Perfective Maintenance}
+$\rightarrow$
+\textbf{V2.0}
+\end{center}
+
+% =========================================================
+% CHAPTER 7
+% =========================================================
+
+\chapter{Overall Maintenance History}
+
+The complete maintenance lifecycle is shown below:
+
+\begin{verbatim}
+Initial V1 Baseline
+        |
+        v
+Corrective Maintenance
+Fix division by zero
+        |
+        v
+V1.1
+        |
+        v
+Adaptive Maintenance
+Add Flask web interface
+        |
+        v
+V1.2
+        |
+        v
+Preventive Maintenance
+Improve validation and code quality
+        |
+        v
+V1.3
+        |
+        v
+Perfective Maintenance
+Add percentage and factorial
+        |
+        v
+V2.0
+\end{verbatim}
+
+The project evolved incrementally from the initial baseline to the
+final maintained version.
+
+% =========================================================
+% CHAPTER 8
+% =========================================================
+
+\chapter{Testing Results}
+
+Testing was performed throughout the software maintenance lifecycle to
+ensure that modifications did not break existing functionality.
+
+\section{Testing Summary}
+
+\begin{table}[H]
+\centering
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{p{6cm} p{4cm} p{2cm}}
+\toprule
+\textbf{Stage} & \textbf{Result} & \textbf{Status} \\
+\midrule
+Initial V1 Baseline & 10 tests passed & PASS \\
+Corrective Maintenance & 11 tests passed & PASS \\
+Preventive Maintenance & Tests passed & PASS \\
+Perfective Maintenance & 16 tests passed & PASS \\
+\bottomrule
+\end{tabular}
+\caption{Testing Results}
+\end{table}
+
+\section{Final Test Command}
+
+The final test suite was executed using:
+
+\begin{lstlisting}[language={}]
+python -m unittest discover -s tests -p "test_*.py"
+\end{lstlisting}
+
+\section{Final Test Result}
+
+\begin{verbatim}
+Ran 16 tests
+OK
+\end{verbatim}
+
+The successful execution of all 16 tests demonstrates that the final
+system maintained its expected functionality after the maintenance
+activities.
+
+% =========================================================
+% CHAPTER 9
+% =========================================================
+
+\chapter{Git Maintenance History}
+
+Git was used to organize the software maintenance activities into
+separate logical commits.
+
+The maintenance history was organized as follows:
+
+\begin{verbatim}
+Initial V1 baseline
+        |
+        v
+Corrective maintenance:
+fix division by zero
+        |
+        v
+Adaptive maintenance:
+add Flask web interface
+        |
+        v
+Preventive maintenance:
+improve validation and code quality
+        |
+        v
+Perfective maintenance:
+add percentage and factorial
+        |
+        v
+Complete software maintenance documentation
+\end{verbatim}
+
+This commit-based organization makes it easier to identify, track, and
+review each maintenance activity independently.
+
+% =========================================================
+% CHAPTER 10
+% =========================================================
+
+\chapter{Comparison of Maintenance Categories}
+
+\begin{table}[H]
+\centering
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{p{3.2cm} p{4cm} p{5.2cm}}
+\toprule
+\textbf{Category} &
+\textbf{Purpose} &
+\textbf{Project Change} \\
+\midrule
+
+Corrective &
+Fix existing defects &
+Fixed division by zero \\
+
+Adaptive &
+Adapt to a new environment &
+Added Flask web interface \\
+
+Preventive &
+Prevent future problems &
+Improved validation, type hints, error handling, and testing \\
+
+Perfective &
+Improve functionality &
+Added factorial and percentage \\
+
+\bottomrule
+\end{tabular}
+\caption{Comparison of Maintenance Categories}
+\end{table}
+
+% =========================================================
+% CHAPTER 11
+% =========================================================
+
+\chapter{Conclusion}
+
+The Math Problem Solver was successfully used to simulate the four major
+categories of software maintenance.
+
+Corrective maintenance fixed an existing division-by-zero defect.
+Adaptive maintenance adapted the application from a command-line
+environment to a web-based environment.
+
+Preventive maintenance improved validation, error handling, type hints,
+and testing. Finally, perfective maintenance enhanced the application
+by adding factorial and percentage calculations.
+
+The maintenance activities were performed systematically using program
+comprehension, change management, impact analysis, reverse engineering,
+and refactoring.
+
+The final system successfully passed:
+
+\begin{center}
+\Large
+\textbf{16 Tests -- OK}
+\end{center}
+
+Therefore, the project demonstrates a complete software maintenance
+lifecycle covering corrective, adaptive, preventive, and perfective
+maintenance activities.
+
+% =========================================================
+% END DOCUMENT
+% =========================================================
+
+\end{document}
