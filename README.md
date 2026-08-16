@@ -216,3 +216,14 @@ def home():
 
 if __name__ == "__main__":
     app.run(debug=True)
+
+    8.3 Benefits
+
+The adaptive maintenance provides:
+
+Browser-based access
+Improved user interaction
+Web-based interface
+Better accessibility
+Adaptation to a new execution environment
+8.4 Version Evolution
