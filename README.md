@@ -204,3 +204,15 @@ The original application was primarily command-line based.
 To adapt the application to a web-based environment, a Flask-based web interface was introduced.
 
 The application can therefore be accessed through a browser instead of depending only on command-line interaction.
+
+Example:
+from flask import Flask, render_template
+
+app = Flask(__name__)
+
+@app.route("/")
+def home():
+    return render_template("index.html")
+
+if __name__ == "__main__":
+    app.run(debug=True)
