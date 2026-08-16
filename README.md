@@ -253,3 +253,22 @@ Example:
 
 def add(a: float, b: float) -> float:
     return a + b
+
+    Type hints make the expected input and output types clearer.
+
+9.3 Benefits
+
+Preventive maintenance helps:
+
+Reduce future errors
+Improve code readability
+Improve maintainability
+Make debugging easier
+Improve software reliability
+9.4 Version Evolution
+
+V1.2
+ ↓
+Preventive Maintenance
+ ↓
+V1.3
