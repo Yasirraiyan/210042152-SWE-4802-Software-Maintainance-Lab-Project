@@ -2,10 +2,7 @@
 
 ## 1. Project Overview
 
-Math Problem Solver is a Python-based mathematical calculation application.
-The project initially provides basic and advanced mathematical operations
-through a command-line interface and is later adapted and improved through
-different software maintenance activities.
+Math Problem Solver is a Python-based mathematical calculation application. The project initially provides basic and advanced mathematical operations through a command-line interface and is later adapted and improved through different software maintenance activities.
 
 The project demonstrates the four major categories of software maintenance:
 
@@ -14,13 +11,14 @@ The project demonstrates the four major categories of software maintenance:
 3. Preventive Maintenance
 4. Perfective Maintenance
 
-For each category, the following activities were performed:
+The project also demonstrates the practical use of four software transformation and analysis tools:
 
-1. Program Comprehension
-2. Change Management
-3. Impact Analysis
-4. Reverse Engineering
-5. Refactoring
+1. Loguru
+2. PySnooper
+3. VizTracer
+4. SnakeViz
+
+These tools were applied to understand program behavior, execution flow, debugging information, logging, and performance characteristics.
 
 ---
 
@@ -40,22 +38,34 @@ The initial version of the application provides:
 
 ```text
 Math-Problem-Solver/
+│
 ├── app.py
 ├── main.py
+│
 ├── calculator/
 │   ├── basic.py
 │   ├── advanced.py
 │   └── validator.py
+│
 ├── utils/
 │   ├── logger.py
 │   └── formatter.py
+│
 ├── tests/
 │   ├── test_basic.py
 │   ├── test_advanced.py
 │   ├── test_validator.py
 │   └── test_integration.py
+│
+├── analysis/
+│   ├── logging_demo.py
+│   ├── pysnooper_demo.py
+│   ├── viztrace_demo.py
+│   └── profile_demo.py
+│
 ├── templates/
 │   └── index.html
+│
 ├── requirements.txt
 └── README.md
 
@@ -69,8 +79,7 @@ OK
 3. Corrective Maintenance
 Scenario
 
-A defect was identified in the division operation. When the denominator
-was zero, the application produced a ZeroDivisionError.
+A defect was identified in the division operation. When the denominator was zero, the application produced a ZeroDivisionError.
 
 Change ID
 
@@ -81,13 +90,13 @@ CM-001
 The existing calculation flow was analyzed:
 
 User
- ↓
+  ↓
 main.py
- ↓
+  ↓
 calculator/basic.py
- ↓
+  ↓
 divide(a, b)
- ↓
+  ↓
 a / b
 
 The divide() function was identified as the source of the problem.
@@ -103,8 +112,7 @@ Prevent division by zero and provide a meaningful error message.
 
 Change Implemented
 
-The divide() function was modified to validate the denominator before
-performing the calculation.
+The divide() function was modified to validate the denominator before performing the calculation.
 
 3.3 Impact Analysis
 
@@ -118,15 +126,15 @@ tests/test_basic.py  → Regression test
 The original execution flow was reconstructed:
 
 User
- ↓
+  ↓
 Select Division
- ↓
+  ↓
 main.py
- ↓
+  ↓
 divide(a, b)
- ↓
+  ↓
 Denominator = 0
- ↓
+  ↓
 ZeroDivisionError
 3.5 Refactoring
 
@@ -154,8 +162,7 @@ V1.1
 4. Adaptive Maintenance
 Scenario
 
-The original application was command-line based. The system needed to be
-adapted so that users could access it through a web browser.
+The original application was command-line based. The system needed to be adapted so that users could access it through a web browser.
 
 Change ID
 
@@ -166,15 +173,14 @@ CM-002
 The existing architecture was analyzed:
 
 User
- ↓
+  ↓
 main.py
- ↓
+  ↓
 Calculator Modules
- ↓
+  ↓
 Result
 
-The calculation modules were already separated from the main application
-logic and could therefore be reused.
+The calculation modules were already separated from the main application logic and could therefore be reused.
 
 4.2 Change Management
 Requirement
@@ -183,8 +189,7 @@ Adapt the existing command-line application to a web-based environment.
 
 Change Implemented
 
-A Flask web interface was introduced while reusing the existing calculator
-modules.
+A Flask web interface was introduced while reusing the existing calculator modules.
 
 Technology Added
 Flask
@@ -194,9 +199,9 @@ Web interface
 
 Affected components:
 
-app.py               → Web application
-requirements.txt     → Flask dependency
-templates/index.html → Web interface
+app.py                → Web application
+requirements.txt      → Flask dependency
+templates/index.html  → Web interface
 
 Reused components:
 
@@ -205,7 +210,7 @@ calculator/advanced.py
 calculator/validator.py
 4.4 Reverse Engineering
 
-The existing flow was analyzed:
+Existing flow:
 
 CLI
  ↓
@@ -217,7 +222,7 @@ Calculator Function
  ↓
 Result
 
-The adapted flow became:
+Adapted flow:
 
 Browser
  ↓
@@ -234,21 +239,17 @@ Result
 Browser
 4.5 Refactoring
 
-A Flask web interface was added without rewriting the existing calculator
-logic.
-
-The existing calculator functions are reused by app.py.
+A Flask web interface was added without rewriting the existing calculator logic.
 
 Browser
- ↓
+  ↓
 Flask app.py
- ↓
+  ↓
 calculator/
  ├── basic.py
  ├── advanced.py
  └── validator.py
- ↓
-Result
+  ↓
 Result
 
 The Math Problem Solver can now be accessed through a web browser.
@@ -262,8 +263,7 @@ V1.2
 5. Preventive Maintenance
 Scenario
 
-The application was working correctly, but improvements were required to
-prevent future defects and make the system easier to maintain.
+The application was working correctly, but improvements were required to prevent future defects and make the system easier to maintain.
 
 Change ID
 
@@ -308,22 +308,20 @@ The intended functionality of the calculator was preserved.
 The validation flow was analyzed:
 
 User Input
- ↓
+  ↓
 validate_number()
- ↓
+  ↓
 Convert to number
- ↓
+  ↓
 Calculator
- ↓
+  ↓
 Result
 
-Potential invalid inputs were identified before they could cause
-unexpected behavior.
+Potential invalid inputs were identified before they could cause unexpected behavior.
 
 5.5 Refactoring
 
-The validation function was improved with type hints and better
-exception handling:
+The validation function was improved with type hints and better exception handling:
 
 def validate_number(value: str) -> float:
     try:
@@ -333,15 +331,13 @@ def validate_number(value: str) -> float:
             "Invalid number. Please enter a valid number."
         )
 
-The advanced calculator was also improved to handle invalid square-root
-and factorial inputs.
+The advanced calculator was also improved to handle invalid square-root and factorial inputs.
 
 Additional validation tests were added.
 
 Result
 
-The software became easier to understand, maintain, and extend while
-preserving its existing behavior.
+The software became easier to understand, maintain, and extend while preserving its existing behavior.
 
 Version
 V1.2
@@ -352,8 +348,7 @@ V1.3
 6. Perfective Maintenance
 Scenario
 
-Users requested additional mathematical functionality and an improved
-web experience.
+Users requested additional mathematical functionality and an improved web experience.
 
 Change ID
 
@@ -361,15 +356,14 @@ CM-004
 
 6.1 Program Comprehension
 
-The existing advanced calculator and web application were analyzed to
-determine where the new features should be integrated.
+The existing advanced calculator and web application were analyzed to determine where the new features should be integrated.
 
 Browser
- ↓
+  ↓
 app.py
- ↓
+  ↓
 Calculator Module
- ↓
+  ↓
 Result
 6.2 Change Management
 User Requirements
@@ -399,13 +393,13 @@ Existing basic calculator functionality remained unchanged.
 The existing feature flow was analyzed:
 
 Browser
- ↓
+  ↓
 app.py
- ↓
+  ↓
 Operation Selection
- ↓
+  ↓
 Calculator Function
- ↓
+  ↓
 Result
 
 The new features were integrated into the existing architecture.
@@ -421,18 +415,19 @@ def factorial(n: int) -> int:
             "Factorial is not defined for negative numbers."
         )
 
+
     if not float(n).is_integer():
         raise ValueError(
             "Factorial requires a whole number."
         )
+
 
     return math.factorial(int(n))
 Percentage
 def percentage(value: float, percent: float) -> float:
     return (value * percent) / 100
 
-The web interface was updated to allow users to select the new
-operations.
+The web interface was updated to allow users to select the new operations.
 
 Result
 
@@ -487,94 +482,42 @@ Perfective Maintenance	16 tests passed
 Final Test Command
 python -m unittest discover -s tests -p "test_*.py"
 Final Result
-Ran 16 tests
+................
+----------------------------------------------------------------------
+Ran 16 tests in 0.002s
+
+
 OK
-9. Git Maintenance History
+9. Transformation and Software Analysis Tools
 
-The project maintenance was organized into separate Git commits:
-
-Initial V1 baseline
-        ↓
-Corrective maintenance: fix division by zero
-        ↓
-Adaptive maintenance: add Flask web interface
-        ↓
-Preventive maintenance: improve validation and code quality
-        ↓
-Perfective maintenance: add percentage and factorial
-        ↓
-Complete software maintenance documentation
-10. Comparison of Maintenance Categories
-Maintenance Category	Purpose	Project Change
-Corrective	Fix existing defects	Fixed division by zero
-Adaptive	Adapt to a new environment	Added Flask web interface
-Preventive	Prevent future problems	Improved validation, type hints, error handling, and testing
-Perfective	Improve functionality	Added factorial and percentage
-11. Conclusion
-
-The Math Problem Solver was successfully used to simulate the four major
-categories of software maintenance.
-
-Corrective maintenance fixed an existing division-by-zero defect.
-Adaptive maintenance adapted the application from a command-line
-environment to a web-based environment. Preventive maintenance improved
-validation, error handling, type hints, and testing. Finally, perfective
-maintenance enhanced the application by adding factorial and percentage
-calculations.
-
-The final system successfully passed:
-
-16 tests
-OK
-
-Therefore, the project demonstrates a complete software maintenance
-lifecycle covering corrective, adaptive, preventive, and perfective
-maintenance activities.
-
-
-### Important
-
-After replacing your current README with the above, **do not keep the old text below it**. Your current README has duplicate headings and this incorrect statement:
-
-> "Preventive and Perfective maintenance activities are still to be performed."
-
-That statement must be removed because you have already completed both.
-
-Then run:
-
-```powershell
-git add README.md
-git commit -m "Complete software maintenance documentation"
-git push
-
-10. Transformation and Software Analysis Tools
-
-As part of the software maintenance activities, four transformation and software analysis tools were applied to the Math Problem Solver project:
+Four transformation and software analysis tools were applied to the Math Problem Solver project:
 
 Loguru
 PySnooper
 VizTracer
 SnakeViz
 
-These tools were used to understand program behavior, execution flow, debugging information, logging, and performance characteristics.
+These tools were used to understand:
 
-10.1 Loguru
-Purpose
+Program behavior
+Execution flow
+Debugging information
+Logging
+Performance characteristics
+10. Loguru
+10.1 Purpose
 
 Loguru is a Python logging library used to record important events during program execution.
 
-Usage in the Project
+10.2 Usage in the Project
 
 Loguru was integrated into the Math Problem Solver to record mathematical operations performed by the application.
 
-For example, when the user performs an addition operation, the application produces a log message such as:
+For example, when the user performs an addition operation:
 
 [LOG] Addition operation performed
 Addition result: 7.0
-
-The log provides information about which operation was performed and helps developers monitor application behavior.
-
-Output Insight
+10.3 Output Insight
 
 The Loguru output confirms that:
 
@@ -582,60 +525,77 @@ The application received the requested operation.
 The corresponding calculator function was executed.
 A log message was generated.
 The calculation completed successfully.
+Figure 1: Loguru Execution Output
 
-Figure 1: Loguru execution output
+Insert your Loguru screenshot here.
 
-[Insert your Loguru screenshot here]
+[Add your screenshot]
+10.4 Maintenance Use
 
-Maintenance Use
+Loguru is useful during corrective maintenance because developers can inspect application logs when users report unexpected behavior.
 
-Loguru is useful during corrective maintenance because developers can inspect application logs when users report unexpected behavior. For example, if a calculation fails, the log can help identify which operation was executed before the failure.
+For example, if a calculation fails, the log can help identify which operation was executed before the failure.
 
-10.2 PySnooper
-Purpose
+11. PySnooper
+11.1 Purpose
 
 PySnooper is a debugging and execution-tracing tool that shows what happens inside Python functions while they are running.
 
-Usage in the Project
+11.2 Usage in the Project
 
-PySnooper was applied to the mathematical functions of the Math Problem Solver. It was used to observe function execution, variable values, and returned results.
+PySnooper was applied to the mathematical functions of the Math Problem Solver.
 
-For example, when an arithmetic function executes, PySnooper can show:
+It was used to observe:
 
-Function call
+Function calls
 Input values
 Variable changes
 Executed statements
+Return values
+
+Example:
+
+Function call
+     ↓
+Input values
+     ↓
+Variable changes
+     ↓
+Calculation
+     ↓
 Return value
-Output Insight
+11.3 Output Insight
 
-The PySnooper output provides a detailed view of the internal execution flow. It helps developers understand how input values move through the calculation function and how the final result is produced.
+The PySnooper output provides a detailed view of the internal execution flow.
 
-Figure 2: PySnooper execution trace
+It helps developers understand how input values move through the calculation function and how the final result is produced.
 
-[Insert your PySnooper screenshot here]
+Figure 2: PySnooper Execution Trace
 
-Maintenance Use
+Insert your PySnooper screenshot here.
 
-PySnooper can be used during corrective maintenance when a function produces an unexpected result. Developers can trace the function execution and identify where the incorrect behavior occurs.
+[Add your screenshot]
+11.4 Maintenance Use
 
-For example, it can help investigate problems in:
+PySnooper can be used during corrective maintenance when a function produces an unexpected result.
+
+It can help investigate problems in:
 
 divide()
 square_root()
 cube_root()
 factorial()
 percentage()
-10.3 VizTracer
-Purpose
+12. VizTracer
+12.1 Purpose
 
 VizTracer is an execution-tracing and performance-analysis tool for Python applications.
 
-Usage in the Project
+12.2 Usage in the Project
 
 VizTracer was used to trace the execution of the Math Problem Solver application.
 
-The application was executed through VizTracer, and the resulting trace was opened using the VizTracer viewer.
+The application was executed through VizTracer, and the generated trace was opened using the VizTracer viewer.
 
 The trace provides information about:
 
@@ -644,68 +604,77 @@ Execution sequence
 Function duration
 Program execution flow
 Performance behavior
-Output Insight
+12.3 Output Insight
 
-The VizTracer visualization provides a timeline of program execution. It allows developers to see which functions were called and how long different parts of the program took to execute.
+The VizTracer visualization provides a timeline of program execution.
 
-Figure 3: VizTracer execution timeline
+It allows developers to see:
 
-[Insert your VizTracer screenshot here]
+Which functions were called
+When functions were called
+How long different parts of the program took
+How execution progressed
+Figure 3: VizTracer Execution Timeline
 
-Maintenance Use
+Insert your VizTracer screenshot here.
+
+[Add your screenshot]
+12.4 Maintenance Use
 
 VizTracer is useful for performance-related maintenance.
 
-For example, if a new feature causes the Math Problem Solver to become slower, VizTracer can help developers identify the functions responsible for the increased execution time.
+For example, if a new feature causes the Math Problem Solver to become slower, VizTracer can help identify the functions responsible for the increased execution time.
 
-It can therefore support maintenance activities such as:
+It can support:
 
 Performance optimization
 Identifying slow functions
 Understanding complex execution flows
 Comparing execution behavior before and after modifications
-10.4 SnakeViz
-Purpose
+13. SnakeViz
+13.1 Purpose
 
 SnakeViz is a graphical visualization tool for Python profiling data generated using cProfile.
 
-Usage in the Project
+13.2 Usage in the Project
 
-The Math Problem Solver was profiled using Python's cProfile, and the resulting profiling data was visualized using SnakeViz.
+The Math Problem Solver was profiled using Python's cProfile.
 
-The profiling process generated information about function calls and execution time.
+The profiling process generated information about:
 
-SnakeViz was then used to display this information graphically.
+Function calls
+Number of calls
+Execution time
 
-Output Insight
+The generated profiling data was then visualized using SnakeViz.
+
+13.3 Output Insight
 
 The SnakeViz visualization helps identify:
 
 Frequently executed functions
 Function execution time
 Number of function calls
-Functions that consume more processing time
+Functions consuming more processing time
 Potential performance bottlenecks
+Figure 4: SnakeViz Profiling Visualization
 
-Figure 4: SnakeViz profiling visualization
+Insert your SnakeViz screenshot here.
 
-[Insert your SnakeViz screenshot here]
-
-Maintenance Use
+[Add your screenshot]
+13.4 Maintenance Use
 
 SnakeViz can be used during performance-oriented maintenance.
 
 For example, after adding new functionality such as factorial and percentage calculations, developers can profile the application to determine whether any function introduces unnecessary execution overhead.
 
-The project already records these perfective changes and the final 16-test result.
-
-11. Comparison of Transformation Tools
+14. Comparison of Transformation Tools
 Tool	Main Purpose	Main Output	Maintenance Use
 Loguru	Logging	Log messages	Error monitoring and debugging
 PySnooper	Execution tracing	Line-by-line trace	Debugging functions
 VizTracer	Execution/performance tracing	Timeline visualization	Performance analysis
 SnakeViz	Profiling visualization	Graphical profile	Finding performance bottlenecks
-12. Alternative Tools
+15. Alternative Tools
 
 There are several alternatives to the tools used in this project.
 
@@ -714,446 +683,156 @@ Loguru	Python logging, Structlog
 PySnooper	pdb, debugpy
 VizTracer	Pyinstrument, cProfile
 SnakeViz	Py-Spy, Tuna
-Preferred Tools
+16. Preferred Tools
 
 For a real software project, Loguru would be preferred for application logging because it provides simple and readable logging.
 
 For performance analysis, VizTracer would be preferred because its timeline visualization makes it easier to understand function execution and identify performance problems.
 
-13. Overall Insight from the Tools
+For debugging, PySnooper is useful when a developer needs to understand the internal execution of a particular function.
+
+For profiling, SnakeViz is useful when a graphical representation of profiling data is required.
+
+17. Overall Insight from the Tools
 
 The four tools provide different perspectives of the same Math Problem Solver application.
 
                  Math Problem Solver
                          │
-        ┌────────────────┼────────────────┐
-        │                │                │
-     Loguru          PySnooper        Profiling
-        │                │                │
-      Logs          Line-by-line     Performance
-                       Trace          Analysis
-                                         │
-                                  ┌──────┴──────┐
-                                  │             │
-                              VizTracer     SnakeViz
+          ┌──────────────┼──────────────┐
+          │              │              │
+       Loguru        PySnooper       Profiling
+          │              │              │
+         Logs       Line-by-line        │
+                       Trace       ┌────┴─────┐
+                                  │          │
+                              VizTracer   SnakeViz
                               Timeline      Profile
 
-Loguru shows what happened, PySnooper shows how the code executed, VizTracer shows how execution progressed over time, and SnakeViz shows where the program spent its processing time.
+The tools provide different types of information:
 
-Together, these tools provide useful information for software maintenance and help developers understand, debug, optimize, and maintain the application.
-
-14. Conclusion
-
-The Math Problem Solver project was used to demonstrate both software maintenance activities and transformation/analysis tools.
-
-The project successfully went through Corrective, Adaptive, Preventive, and Perfective Maintenance, progressing from V1 to V2.0. The final system supports operations including addition, subtraction, multiplication, division, power, square root, cube root, factorial, and percentage, with 16 tests successfully passing.
-
-In addition, Loguru, PySnooper, VizTracer, and SnakeViz were successfully simulated on the project. These tools provided logging, debugging traces, execution visualization, and profiling information.
-
-Therefore, the project demonstrates how transformation and analysis tools can support real-world software maintenance by improving debugging, program comprehension, performance analysis, and maintainability.
+Loguru
+   ↓
+What happened?
 
 
-## Initial Project Structure
-
-```text
-Math-Problem-Solver/
-├── app.py
-├── main.py
-├── calculator/
-│   ├── basic.py
-│   ├── advanced.py
-│   └── validator.py
-├── utils/
-│   ├── logger.py
-│   └── formatter.py
-├── tests/
-│   ├── test_basic.py
-│   ├── test_advanced.py
-│   ├── test_validator.py
-│   └── test_integration.py
-├── templates/
-│   └── index.html
-├── requirements.txt
-└── README.md
+PySnooper
+   ↓
+How did the function execute?
 
 
-Baseline Testing
+VizTracer
+   ↓
+How did execution progress over time?
 
-The initial version successfully passed:
 
-Ran 10 tests
-OK
-3. Corrective Maintenance
-Scenario
+SnakeViz
+   ↓
+Where did the program spend its processing time?
 
-A defect was identified in the division operation. When the denominator
-was zero, the application produced a ZeroDivisionError.
+Together, these tools provide useful information for software maintenance.
 
-Change ID
+They help developers:
 
-CM-001
+Understand program behavior
+Debug problems
+Trace execution
+Monitor application events
+Analyze performance
+Identify bottlenecks
+Maintain existing software
+Evaluate the impact of modifications
+18. Example of Transformation Tools in Maintenance
 
-3.1 Program Comprehension
+Consider the following maintenance scenario.
 
-The existing calculation flow was analyzed:
+Suppose the factorial feature introduced during perfective maintenance becomes slow for a particular input.
 
-User
- ↓
-main.py
- ↓
-calculator/basic.py
- ↓
-divide(a, b)
- ↓
-a / b
+The developer can use the tools as follows:
 
-The divide() function was identified as the source of the problem.
+Step 1 — Loguru
 
-3.2 Change Management
-Problem
+Check the application log:
 
-Division by zero caused the application to crash.
+[LOG] Factorial operation performed
 
-Requested Change
+This confirms that the factorial operation was requested.
 
-Prevent division by zero and provide a meaningful error message.
+Step 2 — PySnooper
 
-Change Implemented
+Trace the factorial function to understand the internal execution.
 
-The divide() function was modified to validate the denominator before
-performing the calculation.
+Function call
+     ↓
+Input
+     ↓
+Validation
+     ↓
+Calculation
+     ↓
+Return
+Step 3 — VizTracer
 
-3.3 Impact Analysis
+Run the application with VizTracer to identify the execution timeline and determine which function consumes more time.
 
-Affected components:
+Step 4 — SnakeViz
 
-calculator/basic.py  → Direct impact
-main.py              → Indirect impact
-tests/test_basic.py  → Regression test
-3.4 Reverse Engineering
+Generate profiling information using cProfile and open it with SnakeViz.
 
-The original execution flow was reconstructed:
+This helps identify functions with high execution time or excessive calls.
 
-User
- ↓
-Select Division
- ↓
-main.py
- ↓
-divide(a, b)
- ↓
-Denominator = 0
- ↓
-ZeroDivisionError
-3.5 Refactoring
+Maintenance Decision
 
-The division function was changed to:
+Based on the results, the developer can:
 
-def divide(a: float, b: float) -> float:
-    if b == 0:
-        raise ValueError("Cannot divide by zero")
-    return a / b
+Refactor the function
+Reduce unnecessary calculations
+Improve validation
+Optimize expensive operations
+Add regression tests
 
-A regression test was added:
+Therefore, the tools can be used together during software maintenance rather than independently.
 
-def test_divide_by_zero(self):
-    with self.assertRaises(ValueError):
-        divide(10, 0)
-Testing Result
-Ran 11 tests
-OK
-Version
-V1
- ↓
+19. Git Maintenance History
+
+The project maintenance was organized into separate Git commits:
+
+Initial V1 baseline
+        ↓
+Corrective maintenance:
+fix division by zero
+        ↓
+Adaptive maintenance:
+add Flask web interface
+        ↓
+Preventive maintenance:
+improve validation and code quality
+        ↓
+Perfective maintenance:
+add percentage and factorial
+        ↓
+Transformation tools:
+Loguru + PySnooper + VizTracer + SnakeViz
+        ↓
+Complete software maintenance documentation
+20. Final Conclusion
+
+The Math Problem Solver project was successfully used to demonstrate the four major categories of software maintenance:
+
 Corrective Maintenance
- ↓
-V1.1
-4. Adaptive Maintenance
-Scenario
-
-The original application was command-line based. The system needed to be
-adapted so that users could access it through a web browser.
-
-Change ID
-
-CM-002
-
-4.1 Program Comprehension
-
-The existing architecture was analyzed:
-
-User
- ↓
-main.py
- ↓
-Calculator Modules
- ↓
-Result
-
-The calculation modules were already separated from the main application
-logic and could therefore be reused.
-
-4.2 Change Management
-Requirement
-
-Adapt the existing command-line application to a web-based environment.
-
-Change Implemented
-
-A Flask web interface was introduced while reusing the existing calculator
-modules.
-
-Technology Added
-Flask
-HTML
-Web interface
-4.3 Impact Analysis
-
-Affected components:
-
-app.py               → Web application
-requirements.txt     → Flask dependency
-templates/index.html → Web interface
-
-Reused components:
-
-calculator/basic.py
-calculator/advanced.py
-calculator/validator.py
-4.4 Reverse Engineering
-
-The existing flow was analyzed:
-
-CLI
- ↓
-main.py
- ↓
-Validation
- ↓
-Calculator Function
- ↓
-Result
-
-The adapted flow became:
-
-Browser
- ↓
-index.html
- ↓
-app.py
- ↓
-Validation
- ↓
-Calculator Function
- ↓
-Result
- ↓
-Browser
-4.5 Refactoring
-
-A Flask web interface was added without rewriting the existing calculator
-logic.
-
-The existing calculator functions are reused by app.py.
-
-Browser
- ↓
-Flask app.py
- ↓
-calculator/
- ├── basic.py
- ├── advanced.py
- └── validator.py
- ↓
-Result
-Result
-
-The Math Problem Solver can now be accessed through a web browser.
-
-Version
-V1.1
- ↓
 Adaptive Maintenance
- ↓
-V1.2
-5. Preventive Maintenance
-Scenario
-
-The application was working correctly, but improvements were required to
-prevent future defects and make the system easier to maintain.
-
-Change ID
-
-CM-003
-
-5.1 Program Comprehension
-
-The existing project structure and dependencies were analyzed.
-
-The following areas were identified for improvement:
-
-Input validation
-Error handling
-Code readability
-Type information
-Test coverage
-5.2 Change Management
-Objective
-
-Improve the maintainability, reliability, and readability of the system.
-
-Changes Implemented
-Improved input validation
-Added type hints
-Improved error handling
-Added mathematical input validation
-Added additional tests
-5.3 Impact Analysis
-
-Affected components:
-
-calculator/validator.py → High impact
-calculator/basic.py     → Medium impact
-calculator/advanced.py  → Medium impact
-tests/test_validator.py → High impact
-tests/test_advanced.py  → High impact
-
-The intended functionality of the calculator was preserved.
-
-5.4 Reverse Engineering
-
-The validation flow was analyzed:
-
-User Input
- ↓
-validate_number()
- ↓
-Convert to number
- ↓
-Calculator
- ↓
-Result
-
-Potential invalid inputs were identified before they could cause
-unexpected behavior.
-
-5.5 Refactoring
-
-The validation function was improved with type hints and better
-exception handling:
-
-def validate_number(value: str) -> float:
-    try:
-        return float(value)
-    except (ValueError, TypeError):
-        raise ValueError(
-            "Invalid number. Please enter a valid number."
-        )
-
-The advanced calculator was also improved to handle invalid square-root
-and factorial inputs.
-
-Additional validation tests were added.
-
-Result
-
-The software became easier to understand, maintain, and extend while
-preserving its existing behavior.
-
-Version
-V1.2
- ↓
 Preventive Maintenance
- ↓
-V1.3
-6. Perfective Maintenance
-Scenario
+Perfective Maintenance
 
-Users requested additional mathematical functionality and an improved
-web experience.
+Corrective maintenance fixed the division-by-zero defect.
 
-Change ID
+Adaptive maintenance adapted the application from a command-line environment to a web-based environment.
 
-CM-004
+Preventive maintenance improved validation, error handling, type hints, and testing.
 
-6.1 Program Comprehension
+Perfective maintenance enhanced the application by adding factorial and percentage calculations.
 
-The existing advanced calculator and web application were analyzed to
-determine where the new features should be integrated.
-
-Browser
- ↓
-app.py
- ↓
-Calculator Module
- ↓
-Result
-6.2 Change Management
-User Requirements
-
-Users requested:
-
-Percentage calculation
-Factorial calculation
-Improved operation selection
-Objective
-
-Improve the functionality and user experience of the application.
-
-6.3 Impact Analysis
-
-Affected components:
-
-calculator/advanced.py
-app.py
-templates/index.html
-tests/test_advanced.py
-
-Existing basic calculator functionality remained unchanged.
-
-6.4 Reverse Engineering
-
-The existing feature flow was analyzed:
-
-Browser
- ↓
-app.py
- ↓
-Operation Selection
- ↓
-Calculator Function
- ↓
-Result
-
-The new features were integrated into the existing architecture.
-
-6.5 Refactoring
-
-Two new mathematical operations were added.
-
-Factorial
-def factorial(n: int) -> int:
-    if n < 0:
-        raise ValueError(
-            "Factorial is not defined for negative numbers."
-        )
-
-    if not float(n).is_integer():
-        raise ValueError(
-            "Factorial requires a whole number."
-        )
-
-    return math.factorial(int(n))
-Percentage
-def percentage(value: float, percent: float) -> float:
-    return (value * percent) / 100
-
-The web interface was updated to allow users to select the new
-operations.
-
-Result
-
-The application now supports:
+The final system supports:
 
 Addition
 Subtraction
@@ -1164,308 +843,53 @@ Square Root
 Cube Root
 Factorial
 Percentage
-Testing Result
+
+The final project successfully passed:
+
 Ran 16 tests
 OK
-Version
-V1.3
- ↓
-Perfective Maintenance
- ↓
-V2.0
-7. Overall Maintenance History
-Initial V1 Baseline
-        ↓
-Corrective Maintenance
-Fix division by zero
-        ↓
-V1.1
-        ↓
-Adaptive Maintenance
-Add Flask web interface
-        ↓
-V1.2
-        ↓
-Preventive Maintenance
-Improve validation and code quality
-        ↓
-V1.3
-        ↓
-Perfective Maintenance
-Add percentage and factorial
-        ↓
-V2.0
-8. Testing Results
-Stage	Result
-Initial V1 Baseline	10 tests passed
-Corrective Maintenance	11 tests passed
-Preventive Maintenance	Tests passed
-Perfective Maintenance	16 tests passed
-Final Test Command
-python -m unittest discover -s tests -p "test_*.py"
-Final Result
-Ran 16 tests
-OK
-9. Git Maintenance History
 
-The project maintenance was organized into separate Git commits:
-
-Initial V1 baseline
-        ↓
-Corrective maintenance: fix division by zero
-        ↓
-Adaptive maintenance: add Flask web interface
-        ↓
-Preventive maintenance: improve validation and code quality
-        ↓
-Perfective maintenance: add percentage and factorial
-        ↓
-Complete software maintenance documentation
-10. Comparison of Maintenance Categories
-Maintenance Category	Purpose	Project Change
-Corrective	Fix existing defects	Fixed division by zero
-Adaptive	Adapt to a new environment	Added Flask web interface
-Preventive	Prevent future problems	Improved validation, type hints, error handling, and testing
-Perfective	Improve functionality	Added factorial and percentage
-11. Conclusion
-
-The Math Problem Solver was successfully used to simulate the four major
-categories of software maintenance.
-
-Corrective maintenance fixed an existing division-by-zero defect.
-Adaptive maintenance adapted the application from a command-line
-environment to a web-based environment. Preventive maintenance improved
-validation, error handling, type hints, and testing. Finally, perfective
-maintenance enhanced the application by adding factorial and percentage
-calculations.
-
-The final system successfully passed:
-
-16 tests
-OK
-
-Therefore, the project demonstrates a complete software maintenance
-lifecycle covering corrective, adaptive, preventive, and perfective
-maintenance activities.
-
-
-### Important
-
-After replacing your current README with the above, **do not keep the old text below it**. Your current README has duplicate headings and this incorrect statement:
-
-> "Preventive and Perfective maintenance activities are still to be performed."
-
-That statement must be removed because you have already completed both.
-
-Then run:
-
-```powershell
-git add README.md
-git commit -m "Complete software maintenance documentation"
-git push
-
-10. Transformation and Software Analysis Tools
-
-As part of the software maintenance activities, four transformation and software analysis tools were applied to the Math Problem Solver project:
+In addition, four transformation and software analysis tools were applied:
 
 Loguru
 PySnooper
 VizTracer
 SnakeViz
 
-These tools were used to understand program behavior, execution flow, debugging information, logging, and performance characteristics.
+These tools provided:
 
-10.1 Loguru
-Purpose
+Loguru     → Logging
+PySnooper  → Debugging and execution tracing
+VizTracer  → Execution timeline and performance analysis
+SnakeViz   → Profiling visualization
 
-Loguru is a Python logging library used to record important events during program execution.
+The practical use of these tools demonstrates how software analysis and transformation tools can support software maintenance.
 
-Usage in the Project
+They help developers understand existing code, investigate defects, trace execution, monitor application behavior, identify performance bottlenecks, and make informed maintenance decisions.
 
-Loguru was integrated into the Math Problem Solver to record mathematical operations performed by the application.
+Therefore, the Math Problem Solver demonstrates a complete software maintenance lifecycle from V1 to V2.0 together with practical application of transformation and software analysis tools.
 
-For example, when the user performs an addition operation, the application produces a log message such as:
 
-[LOG] Addition operation performed
-Addition result: 7.0
 
-The log provides information about which operation was performed and helps developers monitor application behavior.
+### Important
 
-Output Insight
 
-The Loguru output confirms that:
+Your **four screenshots/figures should be inserted** where I marked:
 
-The application received the requested operation.
-The corresponding calculator function was executed.
-A log message was generated.
-The calculation completed successfully.
 
-Figure 1: Loguru execution output
+1. **Figure 1 → Loguru output**
+2. **Figure 2 → PySnooper trace**
+3. **Figure 3 → VizTracer timeline**
+4. **Figure 4 → SnakeViz visualization**
 
-[Insert your Loguru screenshot here]
 
-Maintenance Use
+This matches the assignment requirement to **use the tools in your project, explain the output insight, give maintenance examples, and compare alternatives**. The uploaded project document also already records the same four tools and their respective purposes. :contentReference[oaicite:1]{index=1}
 
-Loguru is useful during corrective maintenance because developers can inspect application logs when users report unexpected behavior. For example, if a calculation fails, the log can help identify which operation was executed before the failure.
 
-10.2 PySnooper
-Purpose
+After pasting/updating `README.md`, run:
 
-PySnooper is a debugging and execution-tracing tool that shows what happens inside Python functions while they are running.
 
-Usage in the Project
-
-PySnooper was applied to the mathematical functions of the Math Problem Solver. It was used to observe function execution, variable values, and returned results.
-
-For example, when an arithmetic function executes, PySnooper can show:
-
-Function call
-Input values
-Variable changes
-Executed statements
-Return value
-Output Insight
-
-The PySnooper output provides a detailed view of the internal execution flow. It helps developers understand how input values move through the calculation function and how the final result is produced.
-
-Figure 2: PySnooper execution trace
-
-[Insert your PySnooper screenshot here]
-
-Maintenance Use
-
-PySnooper can be used during corrective maintenance when a function produces an unexpected result. Developers can trace the function execution and identify where the incorrect behavior occurs.
-
-For example, it can help investigate problems in:
-
-divide()
-square_root()
-cube_root()
-factorial()
-percentage()
-10.3 VizTracer
-Purpose
-
-VizTracer is an execution-tracing and performance-analysis tool for Python applications.
-
-Usage in the Project
-
-VizTracer was used to trace the execution of the Math Problem Solver application.
-
-The application was executed through VizTracer, and the resulting trace was opened using the VizTracer viewer.
-
-The trace provides information about:
-
-Function calls
-Execution sequence
-Function duration
-Program execution flow
-Performance behavior
-Output Insight
-
-The VizTracer visualization provides a timeline of program execution. It allows developers to see which functions were called and how long different parts of the program took to execute.
-
-Figure 3: VizTracer execution timeline
-
-[Insert your VizTracer screenshot here]
-
-Maintenance Use
-
-VizTracer is useful for performance-related maintenance.
-
-For example, if a new feature causes the Math Problem Solver to become slower, VizTracer can help developers identify the functions responsible for the increased execution time.
-
-It can therefore support maintenance activities such as:
-
-Performance optimization
-Identifying slow functions
-Understanding complex execution flows
-Comparing execution behavior before and after modifications
-10.4 SnakeViz
-Purpose
-
-SnakeViz is a graphical visualization tool for Python profiling data generated using cProfile.
-
-Usage in the Project
-
-The Math Problem Solver was profiled using Python's cProfile, and the resulting profiling data was visualized using SnakeViz.
-
-The profiling process generated information about function calls and execution time.
-
-SnakeViz was then used to display this information graphically.
-
-Output Insight
-
-The SnakeViz visualization helps identify:
-
-Frequently executed functions
-Function execution time
-Number of function calls
-Functions that consume more processing time
-Potential performance bottlenecks
-
-Figure 4: SnakeViz profiling visualization
-
-[Insert your SnakeViz screenshot here]
-
-Maintenance Use
-
-SnakeViz can be used during performance-oriented maintenance.
-
-For example, after adding new functionality such as factorial and percentage calculations, developers can profile the application to determine whether any function introduces unnecessary execution overhead.
-
-The project already records these perfective changes and the final 16-test result.
-
-11. Comparison of Transformation Tools
-Tool	Main Purpose	Main Output	Maintenance Use
-Loguru	Logging	Log messages	Error monitoring and debugging
-PySnooper	Execution tracing	Line-by-line trace	Debugging functions
-VizTracer	Execution/performance tracing	Timeline visualization	Performance analysis
-SnakeViz	Profiling visualization	Graphical profile	Finding performance bottlenecks
-12. Alternative Tools
-
-There are several alternatives to the tools used in this project.
-
-Used Tool	Alternative Tools
-Loguru	Python logging, Structlog
-PySnooper	pdb, debugpy
-VizTracer	Pyinstrument, cProfile
-SnakeViz	Py-Spy, Tuna
-Preferred Tools
-
-For a real software project, Loguru would be preferred for application logging because it provides simple and readable logging.
-
-For performance analysis, VizTracer would be preferred because its timeline visualization makes it easier to understand function execution and identify performance problems.
-
-13. Overall Insight from the Tools
-
-The four tools provide different perspectives of the same Math Problem Solver application.
-
-                 Math Problem Solver
-                         │
-        ┌────────────────┼────────────────┐
-        │                │                │
-     Loguru          PySnooper        Profiling
-        │                │                │
-      Logs          Line-by-line     Performance
-                       Trace          Analysis
-                                         │
-                                  ┌──────┴──────┐
-                                  │             │
-                              VizTracer     SnakeViz
-                              Timeline      Profile
-
-Loguru shows what happened, PySnooper shows how the code executed, VizTracer shows how execution progressed over time, and SnakeViz shows where the program spent its processing time.
-
-Together, these tools provide useful information for software maintenance and help developers understand, debug, optimize, and maintain the application.
-
-14. Conclusion
-
-The Math Problem Solver project was used to demonstrate both software maintenance activities and transformation/analysis tools.
-
-The project successfully went through Corrective, Adaptive, Preventive, and Perfective Maintenance, progressing from V1 to V2.0. The final system supports operations including addition, subtraction, multiplication, division, power, square root, cube root, factorial, and percentage, with 16 tests successfully passing.
-
-In addition, Loguru, PySnooper, VizTracer, and SnakeViz were successfully simulated on the project. These tools provided logging, debugging traces, execution visualization, and profiling information.
-
-Therefore, the project demonstrates how transformation and analysis tools can support real-world software maintenance by improving debugging, program comprehension, performance analysis, and maintainability.
-
+```powershell
+git add README.md
+git commit -m "Add transformation tools analysis"
+git push
