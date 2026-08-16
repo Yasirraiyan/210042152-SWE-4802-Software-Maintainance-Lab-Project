@@ -316,3 +316,96 @@ V1.3
 Perfective Maintenance
  ↓
 V2.0
+
+11. Transformation and Analysis Tools
+
+The project demonstrates four important software analysis tools:
+
+Tools Used
+Loguru
+PySnooper
+VizTracer
+SnakeViz
+
+Each tool provides a different type of insight into the software.
+
+Tool	Main Purpose
+1.)Loguru	Logging and monitoring
+2.)PySnooper	Debugging and execution tracing
+3.)VizTracer	Program execution tracing
+4.)SnakeViz	Performance profiling visualization
+
+12. Loguru
+12.1 Introduction
+
+Loguru is a Python logging library that provides a simple way to generate readable application logs.
+
+In this project, Loguru was used to monitor mathematical operations.
+
+12.2 Usage in the Project
+
+Loguru can record:
+
+Operation execution
+Calculation results
+Errors
+Application events
+Debugging information
+
+Example:
+
+from loguru import logger
+
+logger.add("logs/math_solver.log")
+
+logger.info("Starting mathematical calculation")
+
+result = add(4, 3)
+
+logger.info(f"Addition result: {result}")
+
+12.3 Example Output
+
+[INFO] Starting mathematical calculation
+[INFO] Addition operation performed
+[INFO] Addition result: 7
+
+12.4 Insight from Output
+
+The output provides a chronological record of application activities.
+
+For example:
+
+[LOG] Addition operation performed
+Addition result: 7.0
+
+This shows that:
+
+The addition function was executed.
+The operation completed successfully.
+The calculated result was 7.0.
+12.5 Maintenance Use
+
+Loguru is especially useful for Corrective Maintenance.
+
+For example, if a user reports that a calculation is producing an incorrect result, developers can inspect the log to understand what happened during execution.
+
+13. PySnooper
+13.1 Introduction
+
+PySnooper is a Python debugging and execution-tracing tool.
+
+It automatically records the execution of a function, including variable values and return values.
+
+13.2 Usage in the Project
+
+PySnooper can be used to trace mathematical calculations.
+
+Example:
+
+import pysnooper
+
+@pysnooper.snoop()
+def calculate(a, b):
+    result = a + b
+    return result
