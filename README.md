@@ -546,3 +546,208 @@ Then run:
 git add README.md
 git commit -m "Complete software maintenance documentation"
 git push
+
+10. Transformation and Software Analysis Tools
+
+As part of the software maintenance activities, four transformation and software analysis tools were applied to the Math Problem Solver project:
+
+Loguru
+PySnooper
+VizTracer
+SnakeViz
+
+These tools were used to understand program behavior, execution flow, debugging information, logging, and performance characteristics.
+
+10.1 Loguru
+Purpose
+
+Loguru is a Python logging library used to record important events during program execution.
+
+Usage in the Project
+
+Loguru was integrated into the Math Problem Solver to record mathematical operations performed by the application.
+
+For example, when the user performs an addition operation, the application produces a log message such as:
+
+[LOG] Addition operation performed
+Addition result: 7.0
+
+The log provides information about which operation was performed and helps developers monitor application behavior.
+
+Output Insight
+
+The Loguru output confirms that:
+
+The application received the requested operation.
+The corresponding calculator function was executed.
+A log message was generated.
+The calculation completed successfully.
+
+Figure 1: Loguru execution output
+
+[Insert your Loguru screenshot here]
+
+Maintenance Use
+
+Loguru is useful during corrective maintenance because developers can inspect application logs when users report unexpected behavior. For example, if a calculation fails, the log can help identify which operation was executed before the failure.
+
+10.2 PySnooper
+Purpose
+
+PySnooper is a debugging and execution-tracing tool that shows what happens inside Python functions while they are running.
+
+Usage in the Project
+
+PySnooper was applied to the mathematical functions of the Math Problem Solver. It was used to observe function execution, variable values, and returned results.
+
+For example, when an arithmetic function executes, PySnooper can show:
+
+Function call
+Input values
+Variable changes
+Executed statements
+Return value
+Output Insight
+
+The PySnooper output provides a detailed view of the internal execution flow. It helps developers understand how input values move through the calculation function and how the final result is produced.
+
+Figure 2: PySnooper execution trace
+
+[Insert your PySnooper screenshot here]
+
+Maintenance Use
+
+PySnooper can be used during corrective maintenance when a function produces an unexpected result. Developers can trace the function execution and identify where the incorrect behavior occurs.
+
+For example, it can help investigate problems in:
+
+divide()
+square_root()
+cube_root()
+factorial()
+percentage()
+10.3 VizTracer
+Purpose
+
+VizTracer is an execution-tracing and performance-analysis tool for Python applications.
+
+Usage in the Project
+
+VizTracer was used to trace the execution of the Math Problem Solver application.
+
+The application was executed through VizTracer, and the resulting trace was opened using the VizTracer viewer.
+
+The trace provides information about:
+
+Function calls
+Execution sequence
+Function duration
+Program execution flow
+Performance behavior
+Output Insight
+
+The VizTracer visualization provides a timeline of program execution. It allows developers to see which functions were called and how long different parts of the program took to execute.
+
+Figure 3: VizTracer execution timeline
+
+[Insert your VizTracer screenshot here]
+
+Maintenance Use
+
+VizTracer is useful for performance-related maintenance.
+
+For example, if a new feature causes the Math Problem Solver to become slower, VizTracer can help developers identify the functions responsible for the increased execution time.
+
+It can therefore support maintenance activities such as:
+
+Performance optimization
+Identifying slow functions
+Understanding complex execution flows
+Comparing execution behavior before and after modifications
+10.4 SnakeViz
+Purpose
+
+SnakeViz is a graphical visualization tool for Python profiling data generated using cProfile.
+
+Usage in the Project
+
+The Math Problem Solver was profiled using Python's cProfile, and the resulting profiling data was visualized using SnakeViz.
+
+The profiling process generated information about function calls and execution time.
+
+SnakeViz was then used to display this information graphically.
+
+Output Insight
+
+The SnakeViz visualization helps identify:
+
+Frequently executed functions
+Function execution time
+Number of function calls
+Functions that consume more processing time
+Potential performance bottlenecks
+
+Figure 4: SnakeViz profiling visualization
+
+[Insert your SnakeViz screenshot here]
+
+Maintenance Use
+
+SnakeViz can be used during performance-oriented maintenance.
+
+For example, after adding new functionality such as factorial and percentage calculations, developers can profile the application to determine whether any function introduces unnecessary execution overhead.
+
+The project already records these perfective changes and the final 16-test result.
+
+11. Comparison of Transformation Tools
+Tool	Main Purpose	Main Output	Maintenance Use
+Loguru	Logging	Log messages	Error monitoring and debugging
+PySnooper	Execution tracing	Line-by-line trace	Debugging functions
+VizTracer	Execution/performance tracing	Timeline visualization	Performance analysis
+SnakeViz	Profiling visualization	Graphical profile	Finding performance bottlenecks
+12. Alternative Tools
+
+There are several alternatives to the tools used in this project.
+
+Used Tool	Alternative Tools
+Loguru	Python logging, Structlog
+PySnooper	pdb, debugpy
+VizTracer	Pyinstrument, cProfile
+SnakeViz	Py-Spy, Tuna
+Preferred Tools
+
+For a real software project, Loguru would be preferred for application logging because it provides simple and readable logging.
+
+For performance analysis, VizTracer would be preferred because its timeline visualization makes it easier to understand function execution and identify performance problems.
+
+13. Overall Insight from the Tools
+
+The four tools provide different perspectives of the same Math Problem Solver application.
+
+                 Math Problem Solver
+                         │
+        ┌────────────────┼────────────────┐
+        │                │                │
+     Loguru          PySnooper        Profiling
+        │                │                │
+      Logs          Line-by-line     Performance
+                       Trace          Analysis
+                                         │
+                                  ┌──────┴──────┐
+                                  │             │
+                              VizTracer     SnakeViz
+                              Timeline      Profile
+
+Loguru shows what happened, PySnooper shows how the code executed, VizTracer shows how execution progressed over time, and SnakeViz shows where the program spent its processing time.
+
+Together, these tools provide useful information for software maintenance and help developers understand, debug, optimize, and maintain the application.
+
+14. Conclusion
+
+The Math Problem Solver project was used to demonstrate both software maintenance activities and transformation/analysis tools.
+
+The project successfully went through Corrective, Adaptive, Preventive, and Perfective Maintenance, progressing from V1 to V2.0. The final system supports operations including addition, subtraction, multiplication, division, power, square root, cube root, factorial, and percentage, with 16 tests successfully passing.
+
+In addition, Loguru, PySnooper, VizTracer, and SnakeViz were successfully simulated on the project. These tools provided logging, debugging traces, execution visualization, and profiling information.
+
+Therefore, the project demonstrates how transformation and analysis tools can support real-world software maintenance by improving debugging, program comprehension, performance analysis, and maintainability.
