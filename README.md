@@ -44,6 +44,34 @@ The main objectives of this project are:
 
 The project uses the following technologies and tools:
 
+10. Perfective Maintenance
+10.1 Definition
+
+Perfective maintenance improves existing software by adding useful features or improving functionality.
+
+10.2 Perfective Maintenance in This Project
+
+Additional mathematical operations were added to improve the functionality of the application.
+
+The final system supports:
+
+Addition
+Subtraction
+Multiplication
+Division
+Power
+Square Root
+Cube Root
+Factorial
+Percentage
+10.3 Benefits
+
+The new functionality makes the application more useful and provides users with a wider range of mathematical calculations.
+
+10.4 Testing
+
+After adding the new features, the complete test suite was executed.
+
 V1.1
  ↓
 Adaptive Maintenance
