@@ -44,6 +44,12 @@ The main objectives of this project are:
 
 The project uses the following technologies and tools:
 
+V1.1
+ ↓
+Adaptive Maintenance
+ ↓
+V1.2
+
 | Technology / Tool | Purpose |
 |---|---|
 | **Python** | Main programming language |
@@ -227,3 +233,23 @@ Web-based interface
 Better accessibility
 Adaptation to a new execution environment
 8.4 Version Evolution
+
+9. Preventive Maintenance
+9.1 Definition
+
+Preventive maintenance improves the internal quality of software to reduce the possibility of future failures.
+
+9.2 Preventive Maintenance in This Project
+
+The project was improved through:
+
+Better input validation
+Type hints
+Improved error handling
+Cleaner code organization
+Improved maintainability
+
+Example:
+
+def add(a: float, b: float) -> float:
+    return a + b
