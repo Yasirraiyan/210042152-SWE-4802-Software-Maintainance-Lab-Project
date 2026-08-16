@@ -300,3 +300,11 @@ V1.2
 Preventive Maintenance
  ↓
 V1.3
+
+................
+----------------------------------------------------------------------
+Ran 16 tests in 0.002s
+
+OK
+
+This confirms that all 16 automated tests passed successfully.
