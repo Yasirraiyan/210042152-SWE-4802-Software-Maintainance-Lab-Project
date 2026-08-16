@@ -510,3 +510,412 @@ Preventive Maintenance
 Perfective Maintenance
 
 For example, if newly added mathematical functionality makes the application slower, SnakeViz can help identify the functions responsible for the increased execution time.
+
+
+16. Comparison of Transformation Tools
+Tool	Purpose	Output / Insight	Maintenance Usage
+Loguru	Logging	Application events and errors	Corrective
+PySnooper	Debugging	Variables and execution flow	Corrective
+VizTracer	Execution tracing	Visual execution timeline	Corrective / Preventive
+SnakeViz	Profiling	Performance visualization	Preventive / Perfective
+17. Alternatives to the Tools
+17.1 Alternatives to Loguru
+
+Alternative logging tools include:
+
+Python logging
+Structlog
+Logbook
+
+The built-in Python logging module is a strong alternative because it is included with Python.
+
+17.2 Alternatives to PySnooper
+
+Alternative debugging tools include:
+
+pdb
+VS Code Debugger
+Python breakpoint()
+
+The VS Code Debugger is particularly useful for interactive debugging.
+
+17.3 Alternatives to VizTracer
+
+Alternative execution and performance-analysis tools include:
+
+Pyinstrument
+cProfile
+Yappi
+17.4 Alternatives to SnakeViz
+
+Alternative profiling visualization tools include:
+
+Pyinstrument
+Py-Spy
+Tuna
+18. Preferred Tools for Future Projects
+
+For future software projects, the following tools would be preferred:
+
+Loguru
+
+Loguru is preferred for application logging because it provides a simple syntax and readable log output.
+
+VS Code Debugger
+
+For debugging, the VS Code Debugger is preferred because it supports:
+
+Breakpoints
+Variable inspection
+Step-by-step execution
+Call stack inspection
+Interactive debugging
+VizTracer
+
+VizTracer is useful when a detailed visualization of program execution is required.
+
+SnakeViz
+
+SnakeViz is useful when profiling results need to be quickly visualized to identify performance bottlenecks.
+
+19. Use of Tools in Software Maintenance
+
+The tools can be mapped to different maintenance activities.
+
+Maintenance Type	Tool	Example
+Corrective	Loguru	Find errors and application events
+Corrective	PySnooper	Trace incorrect calculations
+Preventive	VizTracer	Analyze program execution
+Preventive	SnakeViz	Identify performance bottlenecks
+Perfective	SnakeViz	Optimize newly added features
+Adaptive	Loguru	Monitor new web functionality
+
+These tools help developers understand the existing system before making maintenance changes.
+
+20. Testing
+
+Automated testing was performed using Python's unittest framework.
+
+The following command was used:
+
+Final Testing Result
+
+................
+----------------------------------------------------------------------
+Ran 16 tests in 0.002s
+
+OK
+python -m unittest discover -s tests -p "test_*.py"
+
+Result
+
+16 tests passed successfully.
+
+This indicates that the implemented maintenance changes and additional functionality were successfully verified through automated testing.
+
+21. Running the Project
+21.1 Clone the Repository
+
+    git clone https://github.com/Yasirraiyan/210042152-SWE-4802-Software-Maintainance-Lab-Project.git
+
+
+    Then move into the project directory:
+
+    cd 210042152-SWE-4802-Software-Maintainance-Lab-Project
+
+    21.2 Create Virtual Environment
+
+On Windows PowerShell:
+
+python -m venv venv
+
+Activate it:
+
+.\venv\Scripts\Activate.ps1
+
+If PowerShell activation is not available, Command Prompt can be used:
+
+venv\Scripts\activate
+
+After successful activation, the terminal should show:
+
+(venv)
+
+21.3 Install Dependencies
+
+If the project contains requirements.txt:
+
+
+python -m pip install -r requirements.txt
+
+21.4 Run the Main Application
+
+From the project root directory:
+
+python main.py
+Example:
+
+===== Math Problem Solver =====
+1. Addition
+2. Subtraction
+3. Multiplication
+4. Division
+5. Square Root
+6. Cube Root
+7. Power
+
+Enter your choice: 1
+Enter first number: 4
+Enter second number: 3
+
+Addition result: 7.0
+
+
+22. Running the Tests
+
+From the project root directory, run:
+
+python -m unittest discover -s tests -p "test_*.py"
+
+Expected result:
+
+................
+----------------------------------------------------------------------
+Ran 16 tests in 0.002s
+
+
+OK
+
+23. Running Loguru Analysis
+
+From the project root directory:
+
+python analysis\logging_demo.py
+
+This executes the Loguru demonstration and produces logging information.
+
+The purpose is to observe application events and calculation activities.
+
+24. Running PySnooper Analysis
+
+From the project root directory:
+
+python analysis\pysnooper_demo.py
+
+This produces detailed execution information such as:
+
+Variable values
+Function calls
+Line execution
+Return values
+25. Running VizTracer Analysis
+
+Install VizTracer if necessary:
+
+pip install viztracer
+
+Run:
+
+viztracer analysis\viztrace_demo.py
+
+A trace output file is generated.
+
+The trace can then be opened using the VizTracer visualization interface.
+
+26. Running SnakeViz Analysis
+
+Install the required profiling visualization tool:
+
+pip install snakeviz
+
+Generate profiling data:
+
+python -m cProfile -o profile.prof analysis\profile_demo.py
+
+Then open the profile:
+
+snakeviz profile.prof
+
+SnakeViz displays the profiling information graphically.
+
+27. Complete Analysis Command Sequence
+
+After activating the virtual environment, the main commands for the project are:
+
+python main.py
+python -m unittest discover -s tests -p "test_*.py"
+python analysis\logging_demo.py
+python analysis\pysnooper_demo.py
+viztracer analysis\viztrace_demo.py
+python -m cProfile -o profile.prof analysis\profile_demo.py
+snakeviz profile.prof
+28. Expected Analysis Outputs
+Loguru
+[LOG] Addition operation performed
+Addition result: 7.0
+
+Insight: Shows that the mathematical operation was executed successfully and provides an execution record.
+
+PySnooper
+Starting var: a = 4
+Starting var: b = 3
+New var: result = 7
+Return value: 7
+
+Insight: Shows the internal execution flow and variable changes.
+
+VizTracer
+
+The generated visualization provides:
+
+Function execution order
+Function duration
+Execution timeline
+Repeated function calls
+
+Insight: Helps understand how the application executes internally.
+
+SnakeViz
+
+The profiling visualization provides:
+
+Function call count
+Execution time
+Cumulative time
+Performance bottlenecks
+
+Insight: Helps identify functions that may require optimization.
+
+29. Transformation Tool Simulation in the Project
+
+The transformation and analysis tools were not studied only theoretically. They were applied to the Math Problem Solver project.
+
+The simulation process was:
+
+Math Problem Solver
+        |
+        +---- Loguru
+        |       |
+        |       +---- Application Logging
+        |
+        +---- PySnooper
+        |       |
+        |       +---- Execution Tracing
+        |
+        +---- VizTracer
+        |       |
+        |       +---- Execution Visualization
+        |
+        +---- SnakeViz
+                |
+                +---- Performance Profiling
+
+This demonstrates how software analysis tools can be integrated into an existing project during maintenance.
+
+30. Importance of Analysis Tools in Maintenance
+
+Software maintenance becomes easier when developers understand how an existing system behaves.
+
+The tools provide different forms of evidence:
+
+Loguru shows what happened.
+PySnooper shows how code executed.
+VizTracer shows the execution timeline.
+SnakeViz shows where execution time is spent.
+
+Therefore, these tools can help developers:
+
+Debug existing defects
+Understand unfamiliar code
+Monitor application behavior
+Find performance bottlenecks
+Improve maintainability
+Support future software changes
+31. Final Project Status
+
+The final project has evolved from the initial baseline application into a more complete and maintainable mathematical software system.
+
+Maintenance Evolution
+V1
+ |
+ +--> Corrective Maintenance
+ |         |
+ |        V1.1
+ |
+ +--> Adaptive Maintenance
+ |         |
+ |        V1.2
+ |
+ +--> Preventive Maintenance
+ |         |
+ |        V1.3
+ |
+ +--> Perfective Maintenance
+           |
+          V2.0
+Final Features
+Addition
+Subtraction
+Multiplication
+Division
+Power
+Square Root
+Cube Root
+Factorial
+Percentage
+Input Validation
+Error Handling
+Logging
+Automated Testing
+Web Adaptation
+Execution Analysis
+Performance Profiling
+32. Conclusion
+
+The Math Problem Solver project demonstrates the practical application of software maintenance concepts in a real Python project.
+
+Corrective maintenance was used to identify and fix defects such as division-by-zero problems.
+
+Adaptive maintenance was used to adapt the application to a web-based environment using Flask.
+
+Preventive maintenance improved validation, type hints, error handling, code organization, and maintainability.
+
+Perfective maintenance added new mathematical operations and improved the overall functionality of the application.
+
+The project also demonstrates the practical use of Loguru, PySnooper, VizTracer, and SnakeViz.
+
+Loguru provides application logging, PySnooper provides detailed execution tracing, VizTracer provides visual execution analysis, and SnakeViz provides performance profiling visualization.
+
+The final automated testing result was:
+
+Ran 16 tests
+OK
+
+Therefore, the project successfully demonstrates how software can be maintained, analyzed, debugged, improved, tested, and extended throughout its lifecycle.
+
+33. Author
+
+Name: Yasir Raiyan
+Student ID: 210042152
+Course: SWE-4802 — Software Maintenance
+Project: Math Problem Solver — Software Maintenance Project
+Repository: 210042152-SWE-4802-Software-Maintainance-Lab-Project
+
+34. Repository
+
+GitHub Repository:
+
+https://github.com/Yasirraiyan/210042152-SWE-4802-Software-Maintainance-Lab-Project
+
+
+
+### Important
+
+
+After replacing your `README.md`, run these commands from your project folder:
+
+
+```powershell
+git add README.md
+git commit -m "Update README with software maintenance and transformation tools"
+git push
